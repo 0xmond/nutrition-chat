@@ -8,7 +8,11 @@ app.use(express.json());
 app.post("/nutrition", async (req, res, nxt) => {
   const { text } = req.body;
 
-  const response = await nutritionChat(text);
+  try {
+    const response = await nutritionChat(text);
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
 
   return res.status(200).json({ success: true, response });
 });
