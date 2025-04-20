@@ -10,11 +10,10 @@ app.post("/nutrition", async (req, res, nxt) => {
 
   try {
     const response = await nutritionChat(text);
+    return res.status(200).json({ success: true, response });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }
-
-  return res.status(200).json({ success: true, response });
 });
 
 const port = process.env.PORT || 3000;
